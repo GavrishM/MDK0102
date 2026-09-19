@@ -52,7 +52,7 @@ namespace _150926
                 .Returns(new User { Login = "login", Password = "pass" });
             var service = new UsersService(mock.Object);
             string login = "login2";
-            string password = "123";
+            string password = "1234823648632487";
 
             bool expected = true;
 
@@ -63,6 +63,38 @@ namespace _150926
 
         [TestMethod]
         public void TestRegistrationFalse()
+        {
+            var mock = new Mock<IUsersRepository>();
+            mock.Setup(repo => repo.GetUser("login"))
+                .Returns(new User { Login = "login", Password = "pass" });
+            var service = new UsersService(mock.Object);
+            string login = "login";
+            string password = "12324242424234432";
+
+            bool expected = false;
+
+            bool actual = service.Registation(login, password);
+
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void TestRegistrationLoginEmpty()
+        {
+            var mock = new Mock<IUsersRepository>();
+            mock.Setup(repo => repo.GetUser("login"))
+                .Returns(new User { Login = "login", Password = "pass" });
+            var service = new UsersService(mock.Object);
+            string login = "";
+            string password = "123";
+
+            bool expected = false;
+
+            bool actual = service.Registation(login, password);
+
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void TestRegistrationShrotPassword()
         {
             var mock = new Mock<IUsersRepository>();
             mock.Setup(repo => repo.GetUser("login"))

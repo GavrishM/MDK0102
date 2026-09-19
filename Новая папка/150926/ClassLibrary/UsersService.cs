@@ -28,8 +28,14 @@ namespace ClassLibrary
             User user = new User { Login = login, Password = password };
             if (repository_.GetUser(login) == null)
             {
-                repository_.SetUser(user);
-                result = true;
+                if (login != "")
+                {
+                    if (password.Length >= 8)
+                    {
+                        repository_.SetUser(user);
+                        result = true;
+                    }
+                }
             }
             return result;
         }
