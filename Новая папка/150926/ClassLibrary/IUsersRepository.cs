@@ -10,5 +10,6 @@ namespace ClassLibrary
     {
         List<User> GetAllUsers();
         User GetUser(string login);
+        void SetUser(User user);
     }
 }

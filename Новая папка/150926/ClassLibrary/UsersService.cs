@@ -14,12 +14,23 @@ namespace ClassLibrary
         {
             repository_ = repository;
         }
-        public string Autorization(string login, string password)
+        public bool Autorization(string login, string password)
         {
-            string result = "ERORE";
+            bool result = false;
             User user = repository_.GetUser(login);
             if (user.Password == password)
-            { result = "true"; }
+            { result = true; }
+            return result;
+        }
+        public bool Registation(string login, string password)
+        {
+            bool result = false;
+            User user = new User { Login = login, Password = password };
+            if (repository_.GetUser(login) == null)
+            {
+                repository_.SetUser(user);
+                result = true;
+            }
             return result;
         }
     }
