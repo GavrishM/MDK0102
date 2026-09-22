@@ -22,7 +22,7 @@ namespace ClassLibrary
             { result = true; }
             return result;
         }
-        public bool Registation(string login, string password)
+        public bool Registration(string login, string password)
         {
             bool result = false;
             User user = new User { Login = login, Password = password };
