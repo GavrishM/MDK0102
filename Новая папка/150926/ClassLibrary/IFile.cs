@@ -8,6 +8,6 @@ namespace ClassLibrary
 {
     public interface IFile
     {
-        List<User> GetUsers();
+        List<User> GetUsers(string filePath);
     }
 }

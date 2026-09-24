@@ -10,8 +10,17 @@ namespace _150926
     [TestClass]
     public class TImporter
     {
+        List<User> TUsersList1 = new List<User>
+        {
+            new User("login6", "p6a9s8s6w4o2r1d"),
+            new User("login7", "p6a9s8s6w4o2r1d"),
+            new User("login8", "p6a9s8s6w4o2r1d"),
+            new User("login9", "p6a9s8s6w4o2r1d"),
+            new User("login10", "p6a9s8s6w4o2r1d")
+        };
         [TestMethod]
-        public void TestUsersImportTrue()
+        [DataRow(TUsersList1)]
+        public void TestUsersImportTrue(List<User> users)
         {
             var mockRepo = new Mock<IUsersRepository>();
             mockRepo.Setup(repo => repo.GetAllUsers())
@@ -25,21 +34,16 @@ namespace _150926
                 });
             var servise = new UsersService(mockRepo.Object);
 
+            string filePath = "path";
+
             var mockFile = new Mock<IFile>();
-            mockFile.Setup(file => file.GetUsers())
-                .Returns(new List<User>
-                {
-                    new User { Login = "login6",  Password = "p6a9s8s6w4o2r1d" },
-                    new User { Login = "login7",  Password = "p6a9s8s6w4o2r1d" },
-                    new User { Login = "login8",  Password = "p6a9s8s6w4o2r1d" },
-                    new User { Login = "login9",  Password = "p6a9s8s6w4o2r1d" },
-                    new User { Login = "login10", Password = "p6a9s8s6w4o2r1d" }
-                });
+            mockFile.Setup(file => file.GetUsers(filePath))
+                .Returns(users);
             var importer = new Importer(mockFile.Object, mockRepo.Object);
 
             bool expected = true;
 
-            bool actual = importer.UsersImport();
+            bool actual = importer.UsersImport(filePath);
 
             Assert.AreEqual(expected, actual);
         }
@@ -58,8 +62,11 @@ namespace _150926
                 });
             var servise = new UsersService(mockRepo.Object);
 
+            string filePath = "path";
+
+
             var mockFile = new Mock<IFile>();
-            mockFile.Setup(file => file.GetUsers())
+            mockFile.Setup(file => file.GetUsers(filePath))
                 .Returns(new List<User>
                 {
                     new User { Login = "login6",  Password = "pass" },
@@ -72,7 +79,7 @@ namespace _150926
 
             bool expected = false;
 
-            bool actual = importer.UsersImport();
+            bool actual = importer.UsersImport(filePath);
 
             Assert.AreEqual(expected, actual);
         }

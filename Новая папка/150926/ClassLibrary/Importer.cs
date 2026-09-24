@@ -17,17 +17,31 @@ namespace ClassLibrary
             repository_ = repository;
             service_ = new UsersService(repository_);
         }
-        public bool UsersImport()
+        public bool UsersImport(string filePath)
         {
-            List<User> users = file_.GetUsers();
+            List<User> users = file_.GetUsers(filePath);
             bool result = true;
             bool temp = true;
             foreach (User user in users)
             {
                 result = service_.Registration(user.Login, user.Password);
                 if (result == false) temp = false;
+                if (repository_.GetUser(user.Login) == null)
+                {
+                    if (user.Login != "")
+                    {
+                        if (user.Password.Length >= 8)
+                        {
+                            result = true;
+                        }
+                    }
+                }
             }
             result = temp;
+            if (result)
+            {
+                repository_.ImportUsersList(users);
+            }
             return result;
         }
     }
