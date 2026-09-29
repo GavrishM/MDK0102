@@ -27,10 +27,10 @@ namespace _15092026
                 .Returns(new List<User>
                 {
                     new User("login", "pass"),
-                    new User ("login2", "pass"),
-                    new User ("login3", "pass"),
-                    new User ("login4", "pass"),
-                    new User ("login5", "pass")
+                    new User("login2", "pass"),
+                    new User("login3", "pass"),
+                    new User("login4", "pass"),
+                    new User("login5", "pass")
                 });
             var servise = new UsersService(mockRepo.Object);
 
@@ -48,11 +48,33 @@ namespace _15092026
                     });
             var importer = new Importer(mockFile.Object, mockRepo.Object);
 
-            bool expected = true;
+            List<User> users = new List<User>
+            {
+                new User("login", "pass"),
+                new User("login2", "pass"),
+                new User("login3", "pass"),
+                new User("login4", "pass"),
+                new User("login5", "pass"),
+                new User("login6", "p6a9s8s6w4o2r1d"),
+                new User("login7", "p6a9s8s6w4o2r1d"),
+                new User("login8", "p6a9s8s6w4o2r1d"),
+                new User("login9", "p6a9s8s6w4o2r1d"),
+                new User("login10", "p6a9s8s6w4o2r1d")
+            };
+            var mockRepoChanged = new Mock<IUsersRepository>();
+            mockRepoChanged.Setup(repo => repo.GetAllUsers())
+                           .Returns(users);
+            var serviceChanged = new UsersService(mockRepoChanged.Object);
+            
+            bool expectedBool = true;
+            List<User> expected = users;
 
-            bool actual = importer.UsersImport(filePath);
+            bool actualBool = importer.UsersImport(filePath);
+            List<User> actual = mockRepoChanged.Object.GetAllUsers();
 
-            Assert.AreEqual(expected, actual);
+
+            Assert.AreEqual(expectedBool, actualBool);
+            CollectionAssert.AreEqual(expected, actual);
         }
 
         [TestMethod]

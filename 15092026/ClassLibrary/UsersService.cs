@@ -38,5 +38,6 @@ namespace ClassLibrary
             }
             return result;
         }
+        //public List<User> GetAllUsers();
     }
 }
