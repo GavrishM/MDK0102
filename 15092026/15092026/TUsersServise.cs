@@ -1,11 +1,13 @@
 ﻿using ClassLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using Moq;
-using System.Security.Cryptography.X509Certificates;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace _150926
+namespace _15092026
 {
     [TestClass]
     public class TUsersServise
@@ -18,7 +20,7 @@ namespace _150926
         {
             var mock = new Mock<IUsersRepository>();
             mock.Setup(repo => repo.GetUser("login"))
-                .Returns(new User { Login = "login", Password = "pass" });
+                .Returns(new User ("login", "pass"));
             var service = new UsersService(mock.Object);
 
             bool actual = service.Autorization(login, password);
@@ -35,7 +37,7 @@ namespace _150926
         {
             var mock = new Mock<IUsersRepository>();
             mock.Setup(repo => repo.GetUser("login"))
-                .Returns(new User { Login = "login", Password = "pass" });
+                .Returns(new User ("login", "pass"));
             var service = new UsersService(mock.Object);
 
             bool actual = service.Registration(login, password);

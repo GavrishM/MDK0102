@@ -8,17 +8,17 @@ namespace ClassLibrary
 {
     public class User
     {
-        public string Login {get; set;}
-        public string Password {get; set;} 
-        public string Name {get; set;}
-        public string Familia {get; set;}
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public string Name { get; set; }
+        public string Familia { get; set; }
 
         public User(string login, string password)
         {
             Login = login;
             Password = password;
         }
-        public User (string login, string password, string name, string familia)
+        public User(string login, string password, string name, string familia)
         {
             Login = login;
             Password = password;

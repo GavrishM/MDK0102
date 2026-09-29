@@ -20,12 +20,11 @@ namespace ClassLibrary
         public bool UsersImport(string filePath)
         {
             List<User> users = file_.GetUsers(filePath);
-            bool result = true;
+            bool result = false;
             bool temp = true;
             foreach (User user in users)
             {
-                result = service_.Registration(user.Login, user.Password);
-                if (result == false) temp = false;
+                //result = service_.Registration(user.Login, user.Password);
                 if (repository_.GetUser(user.Login) == null)
                 {
                     if (user.Login != "")
@@ -34,8 +33,13 @@ namespace ClassLibrary
                         {
                             result = true;
                         }
+                        else result = false;
                     }
+                    else result = false;
                 }
+                else result = false;
+                if (result == false) temp = false;
+
             }
             result = temp;
             if (result)

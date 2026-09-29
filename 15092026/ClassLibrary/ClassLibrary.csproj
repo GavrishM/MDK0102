@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1612AE0F-2723-462D-8321-DEBA2BB3663B}</ProjectGuid>
+    <ProjectGuid>{78E065D9-5E44-4ABB-BAEB-C16E5F006786}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ClassLibrary</RootNamespace>
@@ -45,8 +45,8 @@
     <Compile Include="Importer.cs" />
     <Compile Include="IUsersRepository.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="UsersService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UsersService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

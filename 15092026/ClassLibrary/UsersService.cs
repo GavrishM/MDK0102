@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,7 +24,7 @@ namespace ClassLibrary
         public bool Registration(string login, string password)
         {
             bool result = false;
-            User user = new User { Login = login, Password = password };
+            User user = new User(login, password);
             if (repository_.GetUser(login) == null)
             {
                 if (login != "")
